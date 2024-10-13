@@ -8,7 +8,7 @@ const TabIcon = ({ icon, color, name, focused }) => {
       <Image
         source={icon}
         resizeMode="contain"
-        className={`${focused ? "h-8 w-8" : "h-6 w-6"}`}
+        className={`h-6 w-6 ${focused && "-translate-y-2"}`}
       />
       <Text className={`${focused ? "font-bold" : ""}  text-sm text-white`}>
         {name}
@@ -22,6 +22,7 @@ const TabsLayout = () => {
     <Tabs
       screenOptions={{
         tabBarShowLabel: false,
+
         tabBarStyle: {
           backgroundColor: "#0189BE",
           borderTopColor: "transparent",

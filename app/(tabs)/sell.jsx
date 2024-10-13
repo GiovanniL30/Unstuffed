@@ -1,11 +1,12 @@
-import { View, Text } from "react-native";
+import { View, Text, StatusBar, Platform } from "react-native";
 import React from "react";
+import Container from "../../components/Container";
 
 const Sell = () => {
   return (
-    <View>
+    <Container>
       <Text>Sell</Text>
-    </View>
+    </Container>
   );
 };
 

@@ -1,11 +1,12 @@
-import { View, Text } from "react-native";
+import { View, Text, StatusBar, Platform } from "react-native";
 import React from "react";
+import Container from "../../components/Container";
 
 const Me = () => {
   return (
-    <View>
+    <Container>
       <Text>Me</Text>
-    </View>
+    </Container>
   );
 };
 
