@@ -25,8 +25,8 @@ Make sure you have the following installed on your machine:
 1. Clone the repository:
 
   ```bash
-   git clone https://github.com/your-username/unstuffed-mvp-app.git
-   cd unstuffed-mvp-app
+   git clone https://github.com/GiovanniL30/Unstuffed.git
+   cd Unstuffed
  ```
 
 2. Install dependencies:
