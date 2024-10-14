@@ -24,14 +24,18 @@ Make sure you have the following installed on your machine:
 
 1. Clone the repository:
 
+  ```bash
    git clone https://github.com/your-username/unstuffed-mvp-app.git
    cd unstuffed-mvp-app
+ ```
 
 2. Install dependencies:
 
    Run the following command to install all required packages:
 
+   ```bash
    npm install
+    ```
 
 ### Running the Application
 
@@ -39,7 +43,9 @@ Make sure you have the following installed on your machine:
 
    To start the application in development mode, run:
 
+    ```bash
    npx expo start
+    ```
 
 2. Run on your device or emulator:
 
