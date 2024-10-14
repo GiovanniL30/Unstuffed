@@ -6,6 +6,7 @@ import FormField from "../../components/FormField.jsx";
 import MyButton from "../../components/MyButton.jsx";
 import { router } from "expo-router";
 import { StatusBar } from "expo-status-bar";
+import { createUser } from "../../server/appwrite.js";
 
 const Signup = () => {
   const [form, setForm] = useState({
@@ -19,12 +20,28 @@ const Signup = () => {
 
   const [error, setError] = useState("");
 
-  const handleSignup = () => {
-    const { firstName, lastName, email, contactNumber, password } = form;
+  const handleSignup = async () => {
+    const { firstName, lastName, email, contactNumber, password, middleName } =
+      form;
 
     if (!firstName || !lastName || !email || !contactNumber || !password) {
       setError("All fields are required.");
       return;
+    }
+
+    try {
+      const newUser = await createUser({
+        email: email,
+        firstName: firstName,
+        lastName: lastName,
+        middleName: middleName,
+        contanctNumber: contactNumber,
+        password: password,
+      });
+
+      console.log(newUser);
+    } catch (error) {
+      console.log(error);
     }
 
     setError("");
