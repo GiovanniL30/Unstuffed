@@ -1,4 +1,4 @@
-import { ScrollView, TouchableOpacity, View, Text } from "react-native";
+import { ScrollView, TouchableOpacity, View, Text, Alert } from "react-native";
 import React, { useState } from "react";
 import Container from "../../components/Container";
 import Unstuffed from "../../components/Unstuffed.jsx";
@@ -25,12 +25,17 @@ const Login = () => {
       return;
     }
 
-    if (email !== "admin" || password !== "admin") {
-      setError("Invalid Email or password.");
+    try {
+      const session = await signIn({ email: email, password: password });
+
+      if (!session) {
+        setError("Invalid Credentials");
+        return;
+      }
+    } catch (error) {
+      setError("Invalid Credentials");
       return;
     }
-
-    signIn({ email: email, password: password });
 
     setError("");
     setForm({ email: "", password: "" });

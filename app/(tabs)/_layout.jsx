@@ -5,11 +5,7 @@ import icons from "../../constants/icons";
 const TabIcon = ({ icon, color, name, focused }) => {
   return (
     <View className="items-center justify-center">
-      <Image
-        source={icon}
-        resizeMode="contain"
-        className={`h-6 w-6 ${focused && "-translate-y-2"}`}
-      />
+      <Image source={icon} resizeMode="contain" className={`h-6`} />
       <Text className={`${focused ? "font-bold" : ""}  text-sm text-white`}>
         {name}
       </Text>
@@ -22,7 +18,8 @@ const TabsLayout = () => {
     <Tabs
       screenOptions={{
         tabBarShowLabel: false,
-
+        tabBarInactiveBackgroundColor: "grey",
+        tabBarInactiveTintColor: "#0189BE",
         tabBarStyle: {
           backgroundColor: "#0189BE",
           borderTopColor: "transparent",

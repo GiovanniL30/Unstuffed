@@ -56,7 +56,6 @@ export const createUser = async ({
 
     return newUser;
   } catch (error) {
-    console.log(error);
     throw new Error(error);
   }
 };
@@ -66,7 +65,6 @@ export const signIn = async ({ email, password }) => {
     const session = await account.createEmailPasswordSession(email, password);
     return session;
   } catch (error) {
-    console.log(error);
     throw new Error(error);
   }
 };
@@ -87,7 +85,6 @@ export const getCurrentAccount = async () => {
 
     return user.documents[0];
   } catch (error) {
-    console.error("Error in getCurrentAccount:", error);
     throw new Error("Error here: " + error.message);
   }
 };
