@@ -1,6 +1,13 @@
 import config from "./config";
 
-import { Client, Account, ID, Databases, Avatars } from "react-native-appwrite";
+import {
+  Client,
+  Account,
+  ID,
+  Databases,
+  Avatars,
+  Query,
+} from "react-native-appwrite";
 const client = new Client();
 
 client
@@ -10,14 +17,14 @@ client
 
 const account = new Account(client);
 const avatars = new Avatars(client);
-const database = new Databases(config.databaseId);
+const database = new Databases(client);
 
 export const createUser = async ({
   email,
   firstName,
   middleName,
   lastName,
-  contanctNumber,
+  contactNumber,
   password,
 }) => {
   try {
@@ -39,8 +46,7 @@ export const createUser = async ({
         firstName: firstName,
         middleName: middleName,
         lastName: lastName,
-        contanctNumber,
-        contanctNumber,
+        contactNumber: contactNumber,
         email: email,
         password: password,
         userId: newAccount.$id,
@@ -62,5 +68,26 @@ export const signIn = async ({ email, password }) => {
   } catch (error) {
     console.log(error);
     throw new Error(error);
+  }
+};
+
+export const getCurrentAccount = async () => {
+  try {
+    const currentUser = await account.get();
+
+    if (!currentUser) throw new Error("No current user");
+
+    const user = await database.listDocuments(
+      config.databaseId,
+      config.userCollectionId,
+      [Query.equal("userId", currentUser.$id)]
+    );
+
+    if (!user || user.documents.length === 0) throw new Error("User not found");
+
+    return user.documents[0];
+  } catch (error) {
+    console.error("Error in getCurrentAccount:", error);
+    throw new Error("Error here: " + error.message);
   }
 };

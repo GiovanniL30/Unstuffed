@@ -7,12 +7,17 @@ import {
   StatusBar,
   Platform,
 } from "react-native";
-import { router } from "expo-router";
+import { Redirect, router } from "expo-router";
 import Unstuffed from "../components/Unstuffed";
 import { SafeAreaView } from "react-native-safe-area-context";
 import MyButton from "../components/MyButton";
+import { useUserContext } from "../context/UserContext";
 
 export default function App() {
+  const { isLoading, isLoggedIn } = useUserContext();
+
+  if (isLoggedIn) return <Redirect href="/browse" />;
+
   return (
     <SafeAreaView className="bg-white px-4">
       <ScrollView contentContainerStyle={{ height: "100%" }}>

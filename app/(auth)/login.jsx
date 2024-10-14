@@ -7,6 +7,8 @@ import MyButton from "../../components/MyButton.jsx";
 import { router } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 
+import { signIn } from "../../server/appwrite.js";
+
 const Login = () => {
   const [form, setForm] = useState({
     email: "",
@@ -15,7 +17,7 @@ const Login = () => {
 
   const [error, setError] = useState("");
 
-  const handleLogin = () => {
+  const handleLogin = async () => {
     const { email, password } = form;
 
     if (!email || !password) {
@@ -27,6 +29,8 @@ const Login = () => {
       setError("Invalid Email or password.");
       return;
     }
+
+    signIn({ email: email, password: password });
 
     setError("");
     setForm({ email: "", password: "" });
