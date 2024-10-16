@@ -86,3 +86,20 @@ export const getCurrentAccount = async () => {
     throw new Error("Error here: " + error.message);
   }
 };
+
+export const getNGO = async () => {
+  try {
+    const ngo = await database.listDocuments(
+      config.databaseId,
+      config.ngoCollectionId
+    );
+
+    if (!ngo?.documents || ngo.documents.length === 0) {
+      throw new Error("There are no NGOs available.");
+    }
+
+    return ngo.documents;
+  } catch (error) {
+    throw new Error("Failed to fetch NGOs: " + error.message);
+  }
+};
