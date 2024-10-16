@@ -1,5 +1,6 @@
 import { ScrollView, TouchableOpacity, View, Text, Alert } from "react-native";
 import React, { useState } from "react";
+import Toast from "react-native-root-toast";
 import Container from "../../components/Container";
 import Unstuffed from "../../components/Unstuffed.jsx";
 import FormField from "../../components/FormField.jsx";
@@ -8,8 +9,10 @@ import { router } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 
 import { signIn } from "../../server/appwrite.js";
+import Spinner from "react-native-loading-spinner-overlay";
 
 const Login = () => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [form, setForm] = useState({
     email: "",
     password: "",
@@ -26,26 +29,32 @@ const Login = () => {
     }
 
     try {
+      setIsSubmitting(true);
       const session = await signIn({ email: email, password: password });
 
       if (!session) {
         setError("Invalid Credentials");
-        return;
+      } else {
+        setError("");
+        setForm({ email: "", password: "" });
+        router.push("/browse");
       }
     } catch (error) {
-      setError("Invalid Credentials");
-      return;
+      Toast.show(error.message, { duration: Toast.durations.LONG });
+    } finally {
+      setIsSubmitting(false);
     }
-
-    setError("");
-    setForm({ email: "", password: "" });
-    router.push("/browse");
   };
 
   return (
     <ScrollView>
       <Container>
         <View className="items-center justify-center w-full min-h-[100vh]">
+          <Spinner
+            visible={isSubmitting}
+            textContent="Logging In..."
+            textStyle={{ color: "white" }}
+          />
           <Unstuffed />
 
           <View className="w-full">
@@ -65,6 +74,7 @@ const Login = () => {
             {error && <Text className="text-red-600 text-center">{error}</Text>}
 
             <MyButton
+              disabled={isSubmitting}
               title="Login"
               handlePress={handleLogin}
               containerStyles="mt-4 h-12"

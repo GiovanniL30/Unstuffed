@@ -1,4 +1,4 @@
-import config from "./config";
+import config from "./config.js";
 
 import {
   Client,
@@ -28,15 +28,13 @@ export const createUser = async ({
   password,
 }) => {
   try {
-    const newAccount = await account.create(ID.unique, email, password);
+    const newAccount = await account.create(ID.unique(), email, password);
 
     if (!newAccount) throw new Error();
 
     const avatarURL = avatars.getInitials(
       `${firstName} ${middleName} ${lastName}`
     );
-
-    await signIn({ email: email, password: password });
 
     const newUser = await database.createDocument(
       config.databaseId,
