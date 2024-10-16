@@ -4,6 +4,7 @@ import Container from "../../components/Container";
 import FormField from "../../components/FormField";
 import Organizations from "../../components/Organizations";
 import UploadImage from "../../components/UploadImage";
+import MyButton from "../../components/MyButton";
 
 const Donate = () => {
   return (
@@ -17,6 +18,9 @@ const Donate = () => {
             editable={false}
             textStyle={"text-primary text-xl font-bold"}
           />
+
+          <Organizations />
+          <UploadImage />
           <FormField
             title="Location"
             value="2600 North Cambridge Condominium, Bareng Drive"
@@ -24,7 +28,11 @@ const Donate = () => {
             editable={false}
             textStyle={"text-primary text-xl font-bold"}
           />
-          <Organizations />
+          <MyButton
+            title="Donate"
+            handlePress={() => {}}
+            containerStyles="h-12 mt-8"
+          />
         </View>
       </Container>
     </ScrollView>

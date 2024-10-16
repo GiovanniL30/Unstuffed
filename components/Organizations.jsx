@@ -34,7 +34,7 @@ const Organizations = () => {
     );
 
   return (
-    <View className="w-full">
+    <View className="w-full mt-3">
       <Text className={`text-primary text-xl font-bold mb-4`}>
         Available Organizations
       </Text>
